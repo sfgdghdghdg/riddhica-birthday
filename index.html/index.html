@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>For You, With All My Heart 🎂💖</title>
+  <meta name="description" content="An irresistibly pretty, interactive birthday surprise." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🎂</text></svg>">
+  <style>
+
+    :root{
+      --bg: #0b0b12;
+      --ink: #f8f7fb;
+      --muted: #c6c2d7;
+      --accent: #ff72b6;
+      --accent-2: #8a7dff;
+      --glow: 0 0 40px rgba(255, 114, 182, .35), 0 0 80px rgba(138,125,255,.25);
+      --card: rgba(255,255,255,.06);
+      --card-2: rgba(255,255,255,.08);
+      --blur: blur(14px);
+      --radius: 24px;
+    }
+
+    *{box-sizing: border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Poppins',sans-serif;
+      color:var(--ink);
+      background:#0b0b12;
+      overflow-x:hidden;
+      background: radial-gradient(1200px 800px at 10% -10%, rgba(255,114,182,.15), transparent 60%),
+                  radial-gradient(1000px 600px at 110% 10%, rgba(138,125,255,.18), transparent 60%),
+                  #0b0b12;
+    }
+
+    /* Stars */
+    .stars{position:fixed; inset:0; pointer-events:none; z-index:0}
+    .stars span{position:absolute; width:3px; height:3px; border-radius:50%; background: radial-gradient(circle, #fff, rgba(255,255,255,.2)); filter: drop-shadow(0 0 6px rgba(255,255,255,.6)); animation: twinkle calc(6s + var(--d)*6s) linear infinite;}
+    @keyframes twinkle {0%,100%{opacity:.1; transform:translateY(0)} 50%{opacity:1; transform:translateY(-10px)}}
+    
+    /* Gate */
+    .gate{position:relative; min-height:100dvh; display:grid; place-items:center; padding:24px}
+    .gate-card{position:relative; z-index:1; width:min(680px, 92vw); background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04)); border:1px solid rgba(255,255,255,.15); box-shadow:var(--glow), 0 10px 40px rgba(0,0,0,.45); backdrop-filter: blur(8px); border-radius: var(--radius); padding: clamp(24px, 6vw, 44px); text-align:center;}
+    .title{font-family:'Playfair Display', serif; font-weight: 700; font-size: clamp(28px, 6vw, 56px); margin:0 0 6px}
+    .subtitle{color:var(--muted); margin:0 0 22px; font-size: clamp(14px, 2.4vw, 18px)}
+    .name-input{display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
+    .name-input input{width:min(360px, 74vw); padding:16px 18px; border-radius:16px; border:1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.06); color:var(--ink); font-size:16px;}
+    .cta{padding:14px 20px; border-radius:14px; border:none; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color:white; font-weight:700; cursor:pointer; box-shadow:var(--glow);}
+    .floating{position:absolute; right:0; top:0; pointer-events:none;}
+    .floating img{width:min(420px, 36vw); opacity:.55; animation: floaty 8s ease-in-out infinite}
+    @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+    
+    /* Main */
+    main{display:none}
+    .show main{display:block}
+    .hero{min-height:100dvh; display:grid; place-items:center; padding:40px; text-align:center}
+    .hero p{font-size: 20px; font-family: cursive;}
+    .hero h1{font-family:'Playfair Display', serif; font-size:clamp(36px, 7vw, 80px); margin: 14px 0; line-height: 1.04; text-shadow: 0 6px 24px rgba(255, 77, 166, .25);}
+    .gradient-text{background: linear-gradient(135deg, #ffd1e8, #c7b7ff, #ffe28a); -webkit-background-clip:text; color:transparent;}
+    .btns{display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:14px}
+    .btn{padding:12px 16px; border-radius:12px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); color:var(--ink); cursor:pointer;}
+    .btn:hover{background-color: #ffd1e8; }
+    .btn b{font-family: serif; font-size: 15px;}
+    .grid{display:grid; gap:18px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); width:min(1200px, 94vw); margin:40px auto}
+    .card{background: var(--card); border:1px solid rgba(255,255,255,.14); border-radius:var(--radius); padding: 15px; backdrop-filter:var(--blur);}
+    .card h3{margin: 0 0 6px; font-family: 'Playfair Display', serif}
+    .card p{margin: 0; color: var(--muted);}
+
+    /* Timeline */
+    .timeline{position:relative; padding:10px 0}
+    .timeline::before{content:""; position:absolute; left:12px; top:0; bottom:0; width:2px; background:linear-gradient(180deg, rgba(255,255,255,.15), transparent)}
+    .moment{position:relative; margin-left:32px; padding:14px 16px; border-radius:16px; background:var(--card-2); border:1px solid rgba(255,255,255,.14); margin-bottom:14px}
+    .moment::before{content:""; position:absolute; left:-22px; top:14px; width:10px; height:10px; border-radius:50%; background:linear-gradient(135deg, var(--accent), var(--accent-2))}
+    .gallery-slider{overflow:hidden; border-radius:16px;}
+    .slides{display:flex; transition:transform 0.4s ease-in-out;}
+    .slides img{width:100%; flex-shrink: 0; max-height: 30rem; max-width: 25rem; border-radius: 12px;}
+    .dots{text-align:center; margin-top:10px;}
+    .dots span{display:inline-block; width:10px; height:10px; margin:4px; background:#bbb; border-radius:50%; cursor:pointer;}
+    .dots span.active{background:#fff;}
+    footer{text-align:center; padding:36px 12px; color:var(--muted)}
+    .modal{position:fixed; inset:0; display:none; place-items:center; background:rgba(11,11,18,.55); backdrop-filter: blur(8px);}
+    .modal.open{display:grid}
+    .modal .box{width:min(720px, 92vw); border-radius:20px; background:rgba(255,255,255,.08); padding:22px; text-align:left;}
+    .ribbon-box{display:inline-block; padding:8px 18px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); border-radius:12px; font-weight:700; margin-bottom:12px;}
+    .heart{position:fixed; pointer-events:none; font-size:16px; animation: pop 1s ease forwards}
+    @keyframes pop{0%{transform:translate(-50%,-50%) scale(.6); opacity:1}100%{transform:translate(-50%,-130%) scale(1.6); opacity:0}}
+
+  </style>
+</head>
+<body>
+
+  <div id="stars" class="stars"></div>
+
+  <!-- ENTRY GATE -->
+  <section id="gate" class="gate">
+    <div class="floating"><img src="https://images.unsplash.com/photo-1541280910158-c4e14f0a112f?q=80&w=1200&auto=format&fit=crop" /></div>
+    <div class="gate-card">
+      <h1 class="title">A Tiny Door to Something Magical ✨</h1>
+      <p class="subtitle">Type <b>your name</b> to open your gift 💝</p>
+      <form id="nameForm" class="name-input">
+        <input id="nameInput" placeholder="Your beautiful name…" required maxlength="40" />
+        <button class="cta" type="submit">Open</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <main id="app">
+    <section class="hero">
+      <div>
+        <div class="ribbon-box" id="ribbonText">Happiest Birthday Riddhica ✨</div>
+        <h1>You are My Favourite kind of Magic 🪄<span id="heroName" class="gradient-text">Beautiful</span></h1>
+        <p>Everyday with you is a gift, but today the universe made you a headline. <br>
+        You are sunlight, laughter, and every lovely thing. <br>
+        Scroll to unwrap memories, notes and tiny galaxies made just for you.
+        </p>
+        <br>
+        <div class="btns">
+          <button class="btn" id="btnConfetti"><b>Throw Confetti 🎉</b></button>
+          <button class="btn" id="btnLetter"><b>A Note for You 💌</b></button>
+          <button class="btn" id="btnGift"><b>Open Your Gift 🎁</b></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card"><h3><b>Reasons You’re Magic</b></h3><p>That smile. Your kindness. The way you light up a room.</p></article>
+      <article class="card"><h3><b>Today’s Wishes</b></h3><p>May your year be soft as clouds and bright as fireworks.</p></article>
+      <article class="card"><h3><b>A Promise</b></h3><p>I’ll keep cheering for you, making you laugh, and crafting silly little websites.</p></article>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h3>Little Timeline of Us</h3>
+        <div class="timeline" id="timeline"></div>
+      </div>
+      <div class="card">
+        <h3>📸 Quick Gallery</h3>
+        <div class="gallery-slider">
+          <div class="slides">
+            <img src="IMG_20250326_220351_593_1743006491294.jpg" alt="">
+            <img src="IMG_20250326_220501_368.jpg" alt="">
+            <img src="IMG_20250326_220055_695.jpg" alt="">
+            <img src="IMG_20250326_220243_139.jpg" alt="Pretty lady🤭">
+            <img src="IMG_20250326_220249_816.jpg" alt="">
+            <img src="Messenger_creation_1144114690096290.jpeg.jpg" alt="">
+            <img src="IMG_20250326_220811_445.jpg" alt="">
+            <img src="IMG_20250326_220823_164.jpg" alt="">
+            <img src="IMG_20250326_220811_445.jpg" alt="Beloved">
+            <img src="IMG_20250326_220351_593_1743006491294.jpg" alt="">
+            <img src="IMG_20250326_220823_164.jpg" alt="">
+            <img src="Messenger_creation_7175356100877962175_1743009003404.jpeg.jpg" alt="">
+            <img src="IMG_20250326_220351_593_1743006491294.jpg" alt="">
+            <img src="IMG_20250521_090520_754.jpg" alt="">
+            <img src="Messenger_creation_378573761738616.jpeg.jpg" alt="">
+            <img src="Messenger_creation_7175356100877962175_1743009003404.jpeg.jpg" alt="">
+            <img src="Messenger_creation_948493563014501.jpeg.jpg" alt="">
+            <img src="Messenger_creation_378573761738616.jpeg.jpg" alt="">
+            <img src="IMG_20250326_220604_942.jpg" alt="Cutest">
+            <img src="Messenger_creation_379915471569880.jpeg.jpg" alt="">
+            <img src="IMG_20250326_220604_942.jpg" alt=""> 
+            <img src="Messenger_creation_378573761738616.jpeg.jpg" alt="">
+          </div>
+          <div class="dots"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>⏳ Countdown to your special day</h3>
+        <div id="countdown"></div>
+      </div>
+    </section>
+
+    <footer>Made with 🌙 late nights, ☕ cozy vibes, and ❤️ only for you.</footer>
+  </main>
+
+  <!-- MODALS -->
+  <section class="modal" id="modalLetter">
+    <div class="box">
+      <h3>A Birthday Letter</h3>
+      <p>Happy Birthday, <b id="letterName"></b>! 🎉💖</p>
+      <p>
+         <br>Happy Birthday to one of the most special people in my life! 🎉<br><br>
+        I still miss those old days when we were together in tuition—those moments are memories I’ll always carry with me. You keeping a seat for me, the way you’d blush, smile, tease, and laugh—it made the classes brighter than they could ever be. Talking until the very end of class and studying side by side never felt like a task, but more like the best part of the day.
+        And those long phone calls… hours that slipped by as if they were minutes. I miss that comfort, that fun, that bond we shared—it’s something rare and precious.
+        On your birthday, I want to thank you—for your care, your kindness, your smile that lifts up everyone around you, your motivation that inspires me, and yes, even your little jealousy that always made things fun. You’ve always had this way of making life lighter and happier just by being yourself.
+        So today, I just want to celebrate you. Thank you for being not just a close friend, but someone who made ordinary days unforgettable. I truly wish this year brings you every bit of happiness you’ve given me and more.<br>
+        <br>
+      </p>
+      <p>Happy Birthday — today and always, I choose you. 
+        Happy Birthday to one of the most special people in my life! ...<br><br>Happy Birthday, Riddhica 🎂💕</p>
+      <button class="btn" data-close="#modalLetter">Close</button>
+    </div>
+  </section>
+  <section class="modal" id="modalGift">
+    <div class="box">
+      <h3>A Tiny Digital Gift</h3>
+      <p>Click anywhere for a burst of fireworks ✨</p>
+      <button class="btn" data-close="#modalGift">Close</button>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+
+    const $ = (q,el=document)=>el.querySelector(q);
+    const $$=(q,el=document)=>[...el.querySelectorAll(q)];
+
+    // hearts
+    window.addEventListener('pointermove',e=>{
+      const h=document.createElement('div');h.className='heart';h.textContent='💖';
+      h.style.left=e.clientX+'px';h.style.top=e.clientY+'px';
+      document.body.appendChild(h);setTimeout(()=>h.remove(),1000);
+    });
+
+    // stars
+    for(let i=0;i<80;i++){
+      const s=document.createElement('span');
+      s.style.left=Math.random()*100+'%';
+      s.style.top=Math.random()*100+'%';
+      s.style.setProperty('--d',Math.random());
+      $('#stars').appendChild(s);
+    }
+
+    // gate
+    const form=$('#nameForm');const nameInput=$('#nameInput');const app=$('#app');const gate=$('#gate');
+
+    function openApp(name){
+      $('#heroName').textContent=name;
+      $('#letterName').textContent=name;
+      $('#ribbonText').textContent=`Happiest Birthday, ${name} ✨`;
+      document.body.classList.add('show');
+      gate.style.display='none';
+      burstConfetti(1200);
+    }
+
+    form.addEventListener('submit',e=>{
+      e.preventDefault();
+      const n=nameInput.value.trim();
+      if(n) openApp(n);
+    });
+
+    // confetti
+    function burstConfetti(power=800){
+      const count=power/8;const defaults={spread:80,ticks:200,gravity:1,decay:.9};
+      function fire(p){confetti(Object.assign({},defaults,p));}
+      fire({particleCount:count*0.25,origin:{y:.7}});
+      fire({particleCount:count*0.20,angle:60,origin:{x:0}});
+      fire({particleCount:count*0.20,angle:120,origin:{x:1}});
+      fire({particleCount:count*0.35,startVelocity:45});
+    }
+    $('#btnConfetti').addEventListener('click',()=>burstConfetti(1000));
+
+    // MODALS
+    function openModal(id){ $(id).classList.add('open'); }
+    function closeModal(id){ $(id).classList.remove('open'); }
+
+    $('#btnLetter').addEventListener('click',()=>openModal('#modalLetter'));
+    $('#btnGift').addEventListener('click',()=>openModal('#modalGift'));
+    $$('[data-close]').forEach(b => b.addEventListener('click',()=>closeModal(b.dataset.close)));
+
+    $('#modalGift').addEventListener('pointerdown', e => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = (e.clientX - rect.left)/rect.width;
+      const y = (e.clientY - rect.top)/rect.height;
+      confetti({particleCount:140, spread:100, origin:{x,y}});
+    });
+
+    // timeline
+    const moments=[{date:'The First Hello',text:'The day everything got brighter.'},{date:'Our Favourite Laugh',text:'When jokes became memories.'},{date:'A Quiet Staring',text:'Hands, hearts, horizon.'},{date:'Today',text:'Celebrating you.'}];
+    moments.forEach(m=>{
+      const div=document.createElement('div');div.className='moment';
+      div.innerHTML=`<div class="date">${m.date}</div><div>${m.text}</div>`;
+      $('#timeline').appendChild(div);
+    });
+
+    // gallery slider
+    const slides=$('.slides');const imgs=$$('.slides img');const dots=$('.dots');let idx=0;
+    imgs.forEach((_,i)=>{const dot=document.createElement('span');dot.addEventListener('click',()=>moveTo(i));dots.appendChild(dot);});
+    function updateDots(){dots.querySelectorAll('span').forEach((d,i)=>d.classList.toggle('active',i===idx));}
+    function moveTo(i){idx=i;slides.style.transform=`translateX(-${idx*100}%)`;updateDots();}
+    function autoSlide(){idx=(idx+1)%imgs.length;moveTo(idx);}
+    moveTo(0);setInterval(autoSlide,4000);
+
+    // countdown
+    const targetDate=new Date("2025-08-26T00:00:00").getTime();const countdown=$('#countdown');
+    function updateCountdown(){const now=new Date().getTime();const d=targetDate-now;if(d<=0){countdown.textContent="🎉 It's her Birthday! 🎂";return;}const days=Math.floor(d/(1000*60*60*24));const hrs=Math.floor((d%(1000*60*60*24))/(1000*60*60));const mins=Math.floor((d%(1000*60*60))/(1000*60));const secs=Math.floor((d%(1000*60))/1000);countdown.textContent=`${days}d : ${hrs}h : ${mins}m : ${secs}s`;}
+    updateCountdown();setInterval(updateCountdown,1000);
+    
+  </script>
+</body>
+</html>
